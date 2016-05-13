@@ -136,4 +136,43 @@ function ret_array_reddit($tag, $tipo)
 	return $json_array;
 }
 
+/**
+Retorna os dados de uma determinada imagem
+Essa função deve ser utilizada quando o tipo do item não for um album. Se for um album deve utilizar a função ret_array_album, pois ela retorna além das informações do album um array com as imagens
+*/
+function ret_array_imagem($imgur_id)
+{
+	global $imgur_client_id;
+
+	$c_url = curl_init();
+	curl_setopt($c_url, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($c_url, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($c_url, CURLOPT_URL,"https://api.imgur.com/3/image/".$imgur_id);
+	curl_setopt($c_url, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $imgur_client_id));
+	$result=curl_exec($c_url);
+	curl_close($c_url);
+	$json_array = json_decode($result, true);
+	return $json_array;
+}
+
+/**
+Retorna os dados de um determinado album
+	essa função retorna um array com vários campos;
+	nesses camos retornados, tem um que chama ['data'], esse campo é um array de imagens
+*/
+function ret_array_album($imgur_id)
+{
+	global $imgur_client_id;
+
+	$c_url = curl_init();
+	curl_setopt($c_url, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($c_url, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($c_url, CURLOPT_URL,"https://api.imgur.com/3/album/".$imgur_id);
+	curl_setopt($c_url, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $imgur_client_id));
+	$result=curl_exec($c_url);
+	curl_close($c_url);
+	$json_array = json_decode($result, true);
+	return $json_array;
+}
+
 ?>
