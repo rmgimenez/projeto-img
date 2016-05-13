@@ -8,28 +8,7 @@
 
 <?php 
 	
-	$c_url = curl_init();
-	curl_setopt($c_url, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($c_url, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($c_url, CURLOPT_URL,"https://api.imgur.com/3/gallery/r/cosplay");
-	curl_setopt($c_url, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
-	$result=curl_exec($c_url);
-	curl_close($c_url);
-	$json_array = json_decode($result, true);
-	print("Reddit");
-	//print_r($json_array);
-
-	$c_url = curl_init();
-	curl_setopt($c_url, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($c_url, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($c_url, CURLOPT_URL,"https://api.imgur.com/3/gallery/t/cosplay/time");
-	curl_setopt($c_url, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
-	$result=curl_exec($c_url);
-	curl_close($c_url);
-	$json_array = json_decode($result, true);
-
-	print("TAG");
-	print_r($json_array);
+	print_r(ret_array_tag('funny', 2));
 
 ?>
 
